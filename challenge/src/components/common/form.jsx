@@ -21,6 +21,21 @@ class Form extends Component {
     const { error } = Joi.validate(obj, schema, { abortEarly: false }); // age ye schema bashe ba chanta error akharin error ro namyesh mide
     return error ? error.details[0].message : null;
   };
+
+  renderInput(name, label, type) {
+    const { data, errors } = this.state;
+
+    return (
+      <Input
+        type={type}
+        name={name}
+        value={data[name]}
+        lable={label}
+        onChange={this.handleChange}
+        error={errors[name]}
+      />
+    );
+  }
 }
 
 export default Form;
