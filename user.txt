@@ -1,0 +1,16 @@
+sa1990
+password
+
+
+{
+    "user": {
+        "id": 185268,
+        "email": "saeed@mail.com",
+        "createdAt": "2021-07-17T10:41:27.451Z",
+        "updatedAt": "2021-07-17T10:41:27.456Z",
+        "username": "Saeed1990",
+        "bio": null,
+        "image": null,
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTg1MjY4LCJ1c2VybmFtZSI6IlNhZWVkMTk5MCIsImV4cCI6MTYzMTcwMjQ4N30.oWFVc1g9R16Acpnqw8CSDJ4qDQyGkyr4x_jZkKYtal4"
+    }
+}
