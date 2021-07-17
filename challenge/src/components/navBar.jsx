@@ -6,7 +6,10 @@ const NavBar = ({ user }) => {
     <React.Fragment>
       <nav className="navbar navbar-expand  flex-column flex-md-row bd-navbar Background-color-nav ">
         <span className="navbar-brand">
-          <NavLink to="/"> Challenge </NavLink>
+          <NavLink to="/" className="text-white"> Challenge </NavLink>
+        </span>
+        <span className="text-white">
+          WelCome {user}
         </span>
         <div id="navb" className="navbar-collapse collapse hide">
           {!user && (
