@@ -37,9 +37,9 @@
   }
 }
 
-
 .Background-color-nav {
-
- background-color : #373A3C;
-
+  background-color: #373a3c;
+}
+.Background-color-login {
+  background-color: silver;
 }
