@@ -11,7 +11,7 @@ const NavBar = ({ user }) => {
                 Challenge
               </NavLink>
             </span>
-            <span className="text-white">Welcome {user && user.username}</span>
+            <span className="text-white">{user && `Welcome ${user.username}`}</span>
           </div>
           <div id="navb" className="collapse navbar-collapse ">
             {!user && (
