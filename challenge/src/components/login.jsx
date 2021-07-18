@@ -2,14 +2,30 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import Form from "./common/form";
 import Joi from "joi-browser";
+import auth from "../services/authService";
 class Login extends Form {
   state = {
-    data: { username: "", password: "" },
+    data: { email: "", password: "" },
     errors: {},
   };
   schema = {
-    username: Joi.string().required().label("نام کاربری"),
-    password: Joi.string().required().label("کلمه عبور"),
+    email: Joi.string().required().label("Email"),
+    password: Joi.string().required().label("Password"),
+  };
+
+  doSubmit = async () => {
+    try {
+      const { data } = this.state;
+      await auth.login(data.email, data.password);
+      const { state } = this.props.location;
+     window.location = state ? state.from.pathname : '/'; //ارسال کاربر به صفحه ای که ازش اومده
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        const errors = { ...this.state.errors };
+        errors.username = ex.response.data;
+        this.setState({ errors });
+      }
+    }
   };
   render() {
     return (

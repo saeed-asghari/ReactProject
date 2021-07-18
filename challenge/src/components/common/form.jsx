@@ -23,6 +23,25 @@ class Form extends Component {
     return error ? error.details[0].message : null;
   };
 
+
+  handleSubmit = (e) => {
+    e.preventDefault(); //disable post from to server
+    const errors = this.validate();
+
+    this.setState({ errors: errors || {} });
+    if (errors) return {};
+    this.doSubmit();
+  };
+  handleChange = ({ currentTarget: input }) => {
+    const errors = { ...this.state.errors };
+    const errorMessage = this.validateProperty(input);
+    if (errorMessage) errors[input.name] = errorMessage;
+    else delete errors[input.name];
+    const data = { ...this.state.data };
+    //data[e.currentTarget.name] = e.currentTarget.value;
+    data[input.name] = input.value;
+    this.setState({ data, errors });
+  };
   renderInput(name, label, type) {
     const { data, errors } = this.state;
 
