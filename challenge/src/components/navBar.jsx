@@ -9,7 +9,7 @@ const NavBar = ({ user }) => {
           <NavLink to="/" className="text-white"> Challenge </NavLink>
         </span>
         <span className="text-white">
-          WelCome {user}
+          WelCome {user.username}
         </span>
         <div id="navb" className="navbar-collapse collapse hide">
           {!user && (

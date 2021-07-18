@@ -3,6 +3,9 @@ import { NavLink } from "react-router-dom";
 import Form from "./common/form";
 import Joi from "joi-browser";
 import auth from "../services/authService";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 class Login extends Form {
   state = {
     data: { email: "", password: "" },
@@ -20,10 +23,8 @@ class Login extends Form {
       const { state } = this.props.location;
      window.location = state ? state.from.pathname : '/'; //ارسال کاربر به صفحه ای که ازش اومده
     } catch (ex) {
-      if (ex.response && ex.response.status === 400) {
-        const errors = { ...this.state.errors };
-        errors.username = ex.response.data;
-        this.setState({ errors });
+      if (ex.response && ex.response.status === 422) {
+        toast.error(ex.response.data.errors["email or password"][0]);
       }
     }
   };
@@ -42,12 +43,12 @@ class Login extends Form {
                   {this.renderButton("Login", "btn btn-primary btn-block mb-5")}
 
                   <div className="text-center">
-                    <spam>
+                    <span>
                       Don’t have account?
                       <NavLink to="/">
-                        <spam>Register Now</spam>
+                        <span>Register Now</span>
                       </NavLink>
-                    </spam>
+                    </span>
                   </div>
                 </form>
               </div>
