@@ -2,6 +2,7 @@ import React from "react";
 import Joi, { resolve } from "joi-browser";
 import Form from "./common/form";
 import * as userService from "../services/userService";
+import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 class RegisterForm extends Form {
@@ -12,7 +13,7 @@ class RegisterForm extends Form {
 
   schema = {
     email: Joi.string().required().label("Email"),
-    password: Joi.string().required().min(5).label("Username"),
+    password: Joi.string().required().min(8).label("Password"),
     username: Joi.string().required().label("Username"),
   };
 
@@ -33,17 +34,26 @@ class RegisterForm extends Form {
 
   render() {
     return (
-      <div className="justify-content-center row">
-        <div className="col-md-9 col-lg-7 col-xl-6">
+        <div className="justify-content-center row">
+        <div className="col-md-5">
           <div className="p-4 card-group">
-            <div className="mx-4 card Background-color">
+            <div className="p-4 card Background-color">
               <span className="text-center h1">Register</span>
               <div className="p-4 card-body ">
                 <form onSubmit={this.handleSubmit}>
                   {this.renderInput("username", "User")}
                   {this.renderInput("email", "Email")}
-                  {this.renderInput("password", "Password")}
+                  {this.renderInput("password", "Password","password")}
                   {this.renderButton("Register", "btn btn-primary btn-block mb-5")}
+                  
+                  <div className="text-center">
+                    <span>
+                    Already Registered?
+                      <NavLink to="/login">
+                        <span>Login</span>
+                      </NavLink>
+                    </span>
+                  </div>
                 </form>
               </div>
             </div>

@@ -47,7 +47,7 @@ class Login extends Form {
                   <div className="text-center">
                     <span>
                       Don’t have account?
-                      <NavLink to="/">
+                      <NavLink to="/register">
                         <span>Register Now</span>
                       </NavLink>
                     </span>

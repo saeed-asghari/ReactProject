@@ -12,10 +12,13 @@ class App extends Component {
     this.setState({ user });
   }
   render() {
+    const user = this.state.user;
     return (
       <React.Fragment>
-        <NavBar user={this.state.user} />
-        <SideBar/>
+      
+        <NavBar user={user} />
+        {user &&(<SideBar/>)}
+        
         <Main/>
       </React.Fragment>
     );
