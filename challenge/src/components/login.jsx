@@ -24,7 +24,9 @@ class Login extends Form {
      window.location = state ? state.from.pathname : '/'; //ارسال کاربر به صفحه ای که ازش اومده
     } catch (ex) {
       if (ex.response && ex.response.status === 422) {
-        toast.error(ex.response.data.errors["email or password"][0]);
+        Object.keys(ex.response.data.errors).forEach(key => {
+            toast.error(ex.response.data.errors[key][0]);
+        });
       }
     }
   };
@@ -33,7 +35,7 @@ class Login extends Form {
       <div className="justify-content-center row">
         <div className="col-md-5">
           <div className="p-4 card-group">
-            <div className="p-4 card Background-color-login">
+            <div className="p-4 card Background-color">
                 <span className="text-center h1">Login</span>
                 
               <div className="card-body">
