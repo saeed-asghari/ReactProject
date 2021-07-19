@@ -5,6 +5,7 @@ import Login from "./login";
 import Register from "./register";
 import Logout from "./logout";
 import AllArticles from "./allArticles";
+import NewArticle from "./newArticle";
 const Main = () => {
   return (
     <React.Fragment>
@@ -13,6 +14,7 @@ const Main = () => {
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <ProtectedRoute exact path="/allArticles" component={AllArticles} />
+          <ProtectedRoute exact path="/newArticle" component={NewArticle} />
           <Route path="/logout" component={Logout} />
         </Switch>
       </main>

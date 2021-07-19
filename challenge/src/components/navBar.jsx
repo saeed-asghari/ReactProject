@@ -25,7 +25,7 @@ const NavBar = ({ user }) => {
               </ul>
             )}
             {user && (
-              <ul class="nav navbar-nav ml-auto">
+              <ul className="nav navbar-nav ml-auto">
                 <li>
                   <button className="btn btn-outline-info">
                     <NavLink to="/logout">Logout</NavLink>
