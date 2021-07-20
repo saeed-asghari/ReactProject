@@ -2,35 +2,59 @@ import React, { Component } from "react";
 import Form from "./common/form";
 import Joi from "joi-browser";
 import * as userService from "../services/userService";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 class NewArticle extends Form {
   state = {
-    data: { title: "", description: "", body: "", tagList: "" },
+    data: { title: "", description: "", body: "", tagList: [] },
     errors: {},
     tags: [],
-    selectedTags:[],
+    searchTag: "",
+    filterTags: [],
   };
   schema = {
     title: Joi.string().required().label("Title"),
     description: Joi.optional(),
     body: Joi.optional(),
     tagList: Joi.optional(),
+    searchTag: Joi.optional(),
   };
   getAllTags = async () => {
     const tags = await userService.getAllTags();
-    this.setState({ tags: tags.tags.slice(10).sort() });
+    var tagsRow = tags.tags.slice(10).sort();
+    this.setState({ tags: tagsRow, filterTags: tagsRow });
   };
   async componentDidMount() {
     await this.getAllTags();
   }
-
-  onChange = (event) => {
-    const selectedTags = this.state.selectedTags;
-     selectedTags.push(event.target.name);
-     this.setState({selectedTags:selectedTags})
+  doSubmit = async () => {
+    try {
+      const response = await userService.createArticle(this.state.data);
+    } catch (ex) {
+      if (ex.response && ex.response.status === 422) {
+        Object.keys(ex.response.data.errors).forEach((key) => {
+          toast.error(ex.response.data.errors[key][0]);
+        });
+      }
+    }
   };
-
+  onChange = (event) => {
+    const tagList = this.state.data.tagList;
+    tagList.push(event.target.name);
+    this.setState({ tagList: tagList });
+  };
+  filter = (event) => {
+    let tags = this.state.tags;
+    if (!event.target.value) {
+      this.setState({ filterTags: tags });
+    }
+    let filtered = tags.filter((tag) => {
+      return tag.toLowerCase().includes(event.target.value);
+    });
+    this.setState({ filterTags: filtered });
+  };
   render() {
-    const tags = this.state.tags;
+    const filterTags = this.state.filterTags;
     return (
       <React.Fragment>
         <div className="container">
@@ -41,11 +65,22 @@ class NewArticle extends Form {
               {this.renderTextArea("body", "Body", "5")}
               {this.renderButton("Submit", "btn btn-primary")}
             </div>
-            <div className="col-3">
+            <div className="col-3 p-3">
+              <label>Search</label>
+              <input
+                type="text"
+                onChange={this.filter}
+                name="Search"
+                className="form-control"
+              />
               <ul className="list-unstyled">
-                {tags.map((item, index) => (
+                {filterTags.map((item, index) => (
                   <li key={index}>
-                    <input type="checkbox" onChange={this.onChange} name={item}/>
+                    <input
+                      type="checkbox"
+                      onChange={this.onChange}
+                      name={item}
+                    />
                     <label>{item}</label>
                   </li>
                 ))}
