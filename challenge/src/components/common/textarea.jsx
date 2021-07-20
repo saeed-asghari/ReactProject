@@ -1,10 +1,11 @@
 import React from "react";
-const Input = ({element,name,lable,error,...rest}) => {//rest other property
+const TextArea = ({name,lable,rows,error,...rest}) => {//rest other property
   return (
     <div className="form-group">
       <label htmlFor={name}>{lable}</label>
-      <input
+      <textarea
         {...rest}
+        rows={rows}
         name={name}
         id={name}
         className="form-control"
@@ -14,4 +15,4 @@ const Input = ({element,name,lable,error,...rest}) => {//rest other property
   );
 };
 
-export default Input;
+export default TextArea;
