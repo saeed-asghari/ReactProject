@@ -1,19 +1,28 @@
 import "./App.css";
 import React, { Component } from "react";
-import { Route, Redirect, Switch } from "react-router-dom";
-import Login from "./components/login";
+import NavBar from "./components/navBar";
+import SideBar from "./components/sideBar";
+import Main from "./components/main";
+import auth from "./services/authService";
 
-function App() {
-  return (
-    <React.Fragment>
-      <main className="container">
-        <Switch>
-          <Route path="/login" component={Login} />
-          
-        </Switch>
-      </main>
-    </React.Fragment>
-  );
+class App extends Component {
+  state = { user: "" };
+  componentDidMount() {
+    const user = auth.getCurrentUser();
+    this.setState({ user });
+  }
+  render() {
+    const user = this.state.user;
+    return (
+      <React.Fragment>
+      
+        <NavBar user={user} />
+        {user &&(<SideBar/>)}
+        
+        <Main/>
+      </React.Fragment>
+    );
+  }
 }
 
 export default App;

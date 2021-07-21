@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+.Background-color-nav {
+  background-color: #373a3c;
+}
+.Background-color {
+  background-color: silver;
+}
