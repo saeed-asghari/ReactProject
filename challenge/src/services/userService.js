@@ -3,7 +3,7 @@ import http from "./httpservice";
 import auth from "../services/authService";
 const token = auth.getJwt();
 var header = {
-  headers: { "x-auth-token": `${token}`, "content-type": "application/json" },
+  headers: { "Authorization": `Token ${token}`, "content-type": "application/json"},
 }
 export function register(user) {
   let request = {};
@@ -19,7 +19,7 @@ export async function getAllTags() {
   return data;
 }
 
-export async function createArticle(input) {
+export  function createArticle(input) {
   let request = {};
   request.article = {};
   request.article.title =input.title;
@@ -27,6 +27,6 @@ export async function createArticle(input) {
   request.article.body=input.body;
   request.article.tagList =[];
   request.article.tagList =input.tagList;
-  const { data } = await http.post(apiUrl + "/tags",header);
+  const { data } = http.post(apiUrl + "/articles",request,header);
   return data;
 }

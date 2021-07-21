@@ -9,7 +9,6 @@ class NewArticle extends Form {
     data: { title: "", description: "", body: "", tagList: [] },
     errors: {},
     tags: [],
-    searchTag: "",
     filterTags: [],
   };
   schema = {
@@ -17,7 +16,6 @@ class NewArticle extends Form {
     description: Joi.optional(),
     body: Joi.optional(),
     tagList: Joi.optional(),
-    searchTag: Joi.optional(),
   };
   getAllTags = async () => {
     const tags = await userService.getAllTags();
@@ -27,9 +25,11 @@ class NewArticle extends Form {
   async componentDidMount() {
     await this.getAllTags();
   }
+
   doSubmit = async () => {
     try {
-      const response = await userService.createArticle(this.state.data);
+      const { data } = this.state;
+      await userService.createArticle(data);
     } catch (ex) {
       if (ex.response && ex.response.status === 422) {
         Object.keys(ex.response.data.errors).forEach((key) => {
@@ -38,7 +38,7 @@ class NewArticle extends Form {
       }
     }
   };
-  onChange = (event) => {
+  selectedTags = (event) => {
     const tagList = this.state.data.tagList;
     tagList.push(event.target.name);
     this.setState({ tagList: tagList });
@@ -60,10 +60,13 @@ class NewArticle extends Form {
         <div className="container">
           <div className="row">
             <div className="col-9 p-3">
+
+            <form onSubmit={this.handleSubmit}>
               {this.renderInput("title", "Title")}
               {this.renderInput("description", "Description")}
               {this.renderTextArea("body", "Body", "5")}
               {this.renderButton("Submit", "btn btn-primary")}
+              </form>
             </div>
             <div className="col-3 p-3">
               <label>Search</label>
@@ -78,7 +81,7 @@ class NewArticle extends Form {
                   <li key={index}>
                     <input
                       type="checkbox"
-                      onChange={this.onChange}
+                      onChange={this.selectedTags}
                       name={item}
                     />
                     <label>{item}</label>

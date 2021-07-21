@@ -4,7 +4,7 @@ class Logout extends Component {
  
     componentDidMount() {
         auth.logout();
-        window.location='/';
+        window.location='/login';
     }
     render() { 
         return null  ;
