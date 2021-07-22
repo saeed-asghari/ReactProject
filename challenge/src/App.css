@@ -43,3 +43,15 @@
 .Background-color {
   background-color: silver;
 }
+#nprogress .bar {
+  background: rgb(230, 230, 230) !important;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px rgb(255, 251, 251), 0 0 5px red !important;
+}
+
+#nprogress .spinner-icon {
+  border-top-color: rgb(212, 212, 212) !important;
+  border-left-color: rgb(236, 236, 236) !important;
+}

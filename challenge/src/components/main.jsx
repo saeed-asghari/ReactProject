@@ -13,8 +13,8 @@ const Main = () => {
         <Switch>
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
-          <ProtectedRoute exact path="/allArticles" component={AllArticles} />
-          <ProtectedRoute exact path="/newArticle" component={NewArticle} />
+          <ProtectedRoute exact path="/articles" component={AllArticles} />
+          <ProtectedRoute exact path="/articles/create" component={NewArticle} />
           <Route path="/logout" component={Logout} />
         </Switch>
       </main>

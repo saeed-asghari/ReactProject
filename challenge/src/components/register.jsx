@@ -5,6 +5,8 @@ import * as userService from "../services/userService";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { loadProgressBar } from 'axios-progress-bar'
+import 'axios-progress-bar/dist/nprogress.css'
 class RegisterForm extends Form {
   state = {
     data: { email: "", password: "", username: "" },
@@ -19,6 +21,7 @@ class RegisterForm extends Form {
 
   doSubmit = async () => {
     try {
+      loadProgressBar()
       const data = { ...this.state.data };
       this.setState({ data });
       const response = await userService.register(this.state.data);

@@ -2,32 +2,44 @@ import React, { Component } from "react";
 import Form from "./common/form";
 import Joi from "joi-browser";
 import * as userService from "../services/userService";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
+import { loadProgressBar } from 'axios-progress-bar'
+import 'axios-progress-bar/dist/nprogress.css'
 class NewArticle extends Form {
+  
   state = {
     data: { title: "", description: "", body: "", tagList: [] },
     errors: {},
     tags: [],
     filterTags: [],
   };
+  
   schema = {
     title: Joi.string().required().label("Title"),
     description: Joi.optional(),
     body: Joi.optional(),
     tagList: Joi.optional(),
   };
+
+  
   getAllTags = async () => {
+    loadProgressBar()
     const tags = await userService.getAllTags();
     var tagsRow = tags.tags.slice(10).sort();
     this.setState({ tags: tagsRow, filterTags: tagsRow });
   };
   async componentDidMount() {
     await this.getAllTags();
+    toast("Test");
+    toast.error("Error Notification !", {
+      position: toast.POSITION.TOP_LEFT
+    });
   }
 
   doSubmit = async () => {
     try {
+      loadProgressBar()
       const { data } = this.state;
       await userService.createArticle(data);
     } catch (ex) {
@@ -54,6 +66,7 @@ class NewArticle extends Form {
     this.setState({ filterTags: filtered });
   };
   render() {
+    toast.success("Hello"); 
     const filterTags = this.state.filterTags;
     return (
       <React.Fragment>

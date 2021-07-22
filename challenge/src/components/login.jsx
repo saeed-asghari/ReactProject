@@ -5,7 +5,8 @@ import Joi from "joi-browser";
 import auth from "../services/authService";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-
+import { loadProgressBar } from 'axios-progress-bar'
+import 'axios-progress-bar/dist/nprogress.css'
 class Login extends Form {
   state = {
     data: { email: "", password: "" },
@@ -18,6 +19,7 @@ class Login extends Form {
 
   doSubmit = async () => {
     try {
+      loadProgressBar()
       const { data } = this.state;
       await auth.login(data.email, data.password);
       const { state } = this.props.location;
