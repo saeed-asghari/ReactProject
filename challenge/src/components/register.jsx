@@ -4,7 +4,6 @@ import Form from "./common/form";
 import * as userService from "../services/userService";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
 import { loadProgressBar } from 'axios-progress-bar'
 import 'axios-progress-bar/dist/nprogress.css'
 class RegisterForm extends Form {

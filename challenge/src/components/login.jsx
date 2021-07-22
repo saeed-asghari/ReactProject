@@ -4,9 +4,9 @@ import Form from "./common/form";
 import Joi from "joi-browser";
 import auth from "../services/authService";
 import { toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
 import { loadProgressBar } from 'axios-progress-bar'
 import 'axios-progress-bar/dist/nprogress.css'
+
 class Login extends Form {
   state = {
     data: { email: "", password: "" },
@@ -27,7 +27,7 @@ class Login extends Form {
     } catch (ex) {
       if (ex.response && ex.response.status === 422) {
         Object.keys(ex.response.data.errors).forEach(key => {
-            toast.error(ex.response.data.errors[key][0]);
+            toast.error(key + ex.response.data.errors[key][0]);
         });
       }
     }

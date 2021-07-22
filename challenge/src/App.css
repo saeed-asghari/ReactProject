@@ -38,10 +38,10 @@
 }
 
 .Background-color-nav {
-  background-color: #373a3c;
+  background-color: #373a3c !important;
 }
 .Background-color {
-  background-color: silver;
+  background-color: silver !important;
 }
 #nprogress .bar {
   background: rgb(230, 230, 230) !important;

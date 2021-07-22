@@ -3,7 +3,6 @@ import Form from "./common/form";
 import Joi from "joi-browser";
 import * as userService from "../services/userService";
 import {  toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.min.css';
 import { loadProgressBar } from 'axios-progress-bar'
 import 'axios-progress-bar/dist/nprogress.css'
 class NewArticle extends Form {
@@ -31,10 +30,6 @@ class NewArticle extends Form {
   };
   async componentDidMount() {
     await this.getAllTags();
-    toast("Test");
-    toast.error("Error Notification !", {
-      position: toast.POSITION.TOP_LEFT
-    });
   }
 
   doSubmit = async () => {
@@ -42,6 +37,7 @@ class NewArticle extends Form {
       loadProgressBar()
       const { data } = this.state;
       await userService.createArticle(data);
+      toast.success("Article added successful")
     } catch (ex) {
       if (ex.response && ex.response.status === 422) {
         Object.keys(ex.response.data.errors).forEach((key) => {
@@ -66,7 +62,6 @@ class NewArticle extends Form {
     this.setState({ filterTags: filtered });
   };
   render() {
-    toast.success("Hello"); 
     const filterTags = this.state.filterTags;
     return (
       <React.Fragment>
