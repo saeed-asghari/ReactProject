@@ -47,3 +47,8 @@ export async function getAllArticles(user) {
   }
   return data.articles;
 }
+
+export async function deleteArticles(slug){
+  const { data } = await http.delete(`${apiUrl}/articles/${slug}`, header);
+   return data;
+}

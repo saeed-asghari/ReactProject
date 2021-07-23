@@ -28,6 +28,7 @@ class NewArticle extends Form {
     var tagsRow = tags.tags.slice(10).sort();
     this.setState({ tags: tagsRow, filterTags: tagsRow });
   };
+  
   async componentDidMount() {
     await this.getAllTags();
   }
