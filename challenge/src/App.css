@@ -38,8 +38,32 @@
 }
 
 .Background-color-nav {
-  background-color: #373a3c;
+  background-color: #373a3c !important;
 }
 .Background-color {
-  background-color: silver;
+  background-color: silver !important;
+}
+#nprogress .bar {
+  background: rgb(230, 230, 230) !important;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px rgb(255, 251, 251), 0 0 5px red !important;
+}
+
+#nprogress .spinner-icon {
+  border-top-color: rgb(212, 212, 212) !important;
+  border-left-color: rgb(236, 236, 236) !important;
+}
+
+.react-confirm-alert-button-group > button:first-child {
+  background-color:red !important;
+  text-align: left;
+}
+
+.react-confirm-alert-overlay {
+  background: unset !important;
+}
+.react-confirm-alert-body{
+  border: 1px solid !important;
 }

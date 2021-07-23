@@ -2,34 +2,43 @@ import React, { Component } from "react";
 import Form from "./common/form";
 import Joi from "joi-browser";
 import * as userService from "../services/userService";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import {  toast } from 'react-toastify';
+import { loadProgressBar } from 'axios-progress-bar'
+import 'axios-progress-bar/dist/nprogress.css'
 class NewArticle extends Form {
+  
   state = {
     data: { title: "", description: "", body: "", tagList: [] },
     errors: {},
     tags: [],
     filterTags: [],
   };
+  
   schema = {
     title: Joi.string().required().label("Title"),
     description: Joi.optional(),
     body: Joi.optional(),
     tagList: Joi.optional(),
   };
+
+  
   getAllTags = async () => {
+    loadProgressBar()
     const tags = await userService.getAllTags();
     var tagsRow = tags.tags.slice(10).sort();
     this.setState({ tags: tagsRow, filterTags: tagsRow });
   };
+  
   async componentDidMount() {
     await this.getAllTags();
   }
 
   doSubmit = async () => {
     try {
+      loadProgressBar()
       const { data } = this.state;
       await userService.createArticle(data);
+      toast.success("Article added successful")
     } catch (ex) {
       if (ex.response && ex.response.status === 422) {
         Object.keys(ex.response.data.errors).forEach((key) => {
