@@ -28,7 +28,7 @@ class RegisterForm extends Form {
     } catch (ex) {
       if (ex.response && ex.response.status === 422) {
         Object.keys(ex.response.data.errors).forEach(key => {
-            toast.error(ex.response.data.errors[key][0]);
+            toast.error(key + ex.response.data.errors[key][0]);
         });
       }
     }
