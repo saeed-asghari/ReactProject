@@ -13,7 +13,7 @@ class RegisterForm extends Form {
   };
 
   schema = {
-    email: Joi.string().required().label("Email"),
+    email: Joi.string().min(3).required().email({ minDomainAtoms: 2 }).label("Email"),
     password: Joi.string().required().min(8).label("Password"),
     username: Joi.string().required().label("Username"),
   };
@@ -28,7 +28,7 @@ class RegisterForm extends Form {
     } catch (ex) {
       if (ex.response && ex.response.status === 422) {
         Object.keys(ex.response.data.errors).forEach(key => {
-            toast.error(ex.response.data.errors[key][0]);
+            toast.error(key + ex.response.data.errors[key][0]);
         });
       }
     }
