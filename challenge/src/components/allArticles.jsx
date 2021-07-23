@@ -7,6 +7,7 @@ import {
   Table,
   TableHeaderRow,
   PagingPanel,
+  TableColumnResizing
 } from "@devexpress/dx-react-grid-material-ui";
 import * as userService from "../services/userService";
 import { loadProgressBar } from "axios-progress-bar";
@@ -39,6 +40,14 @@ class AllArticles extends Component {
       { name: "tags", title: "Tags" },
       { name: "createdAt", title: "Created" },
     ];
+    const defaultColumnWidths = [
+        { columnName: 'rowNumber', width: 100 },
+        { columnName: 'title', width: 100 },
+        { columnName: 'author_username', width: 180 },
+        { columnName: 'body', width: 240 },
+        { columnName: 'tags', width: 180 },
+        { columnName: 'createdAt', width: 150 },
+      ];
     const rows = this.state.articles;
     return (
       <div className="col-12 p-3">
@@ -47,6 +56,7 @@ class AllArticles extends Component {
             <PagingState defaultCurrentPage={0} pageSize={5} />
             <IntegratedPaging />
             <Table />
+            <TableColumnResizing defaultColumnWidths={defaultColumnWidths}/>
             <TableHeaderRow />
             <PagingPanel />
           </Grid>

@@ -8,7 +8,7 @@ const NavBar = ({ user }) => {
           <div className="navbar-header">
             <span className="navbar-brand">
               <NavLink to="/" className="text-white">
-                Challenge
+              Arvan Challenge
               </NavLink>
             </span>
             <span className="text-white">{user && `Welcome ${user.username}`}</span>

@@ -22,6 +22,7 @@ class App extends Component {
         {user &&(<SideBar/>)}
         
         <Main/>
+        
       </React.Fragment>
     );
   }
