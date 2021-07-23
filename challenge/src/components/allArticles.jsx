@@ -58,7 +58,6 @@ class AllArticles extends Component {
   onCurrentPageChange = (page) => {
     return page;
   };
-  //onCurrentPageChange()
   render() {
     this.onCurrentPageChange(1);
     const columns = [
@@ -80,10 +79,6 @@ class AllArticles extends Component {
     const rows = this.state.articles;
     const loading = this.state.loading;
     const commitChanges = ({ deleted }) => {
-      //   if (deleted) {
-      //     const index = deleted[0];
-      //     this.deleteArticles(index);
-      //   }
       confirmAlert({
         title: "Delete Article",
         message: "Are you sure to delete Article?",
@@ -99,11 +94,10 @@ class AllArticles extends Component {
           },
           {
             label: "No",
-            onClick: () => ("Click No"),
+            onClick: () => "Click No",
           },
         ],
       });
-
     };
     return (
       <div className="col-12 p-3">
