@@ -55,11 +55,7 @@ class AllArticles extends Component {
     }
   };
 
-  onCurrentPageChange = (page) => {
-    return page;
-  };
   render() {
-    this.onCurrentPageChange(1);
     const columns = [
       { name: "rowNumber", title: "#" },
       { name: "title", title: "Title" },
@@ -108,7 +104,6 @@ class AllArticles extends Component {
               <PagingState
                 defaultCurrentPage={0}
                 pageSize={5}
-                onCurrentPageChange={this.onCurrentPageChange}
               />
               <IntegratedPaging />
               <EditingState onCommitChanges={commitChanges} />
