@@ -1,5 +1,5 @@
 ## The Project
-Arvan Challenge
+Test Project
 ## Technologies
 * [React]
 
